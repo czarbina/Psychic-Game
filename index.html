@@ -26,10 +26,11 @@
     console.log(computerGuess);
 
     function reset() {
+    alreadyGuessed = [];
     computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log(computerGuess);
     guessesLeft = 10;
-    alreadyGuessed = [];
+
     }
     	
     // This function is run whenever the user presses a key. We "document" the event when the user releases a key. We will pass the function an argument, the event, which is the key that the user presses.
@@ -54,6 +55,8 @@
       guessesLeft = guessesLeft-1;
       alreadyGuessed.push(userGuess);
       console.log("Nope: " + alreadyGuessed + " is not right!");
+      alreadyGuessed.toString();
+      document.getElementById("lettersGuessed").innerHTML = alreadyGuessed;
 
     }
       else if (guessesLeft <= 0) {
@@ -67,7 +70,6 @@
           "<p>Wins: " + wins + "</p>" +
           "<p>Losses: " + losses + "</p>" +
           "<p>Guesses Left: " + guessesLeft + "</p>"
-          "<p>Letters guessed: " + alreadyGuessed + "</p>";
 
     document.querySelector("#game").innerHTML = html;   
 
