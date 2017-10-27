@@ -18,47 +18,58 @@
     var wins = 0;
     var losses = 0;
     var guessesLeft = 10;
-    var alreadyGuessed = []
-    	
-  
+    var alreadyGuessed = [];
 
     // Randomly chooses a choice from the options array. This is the Computer's guess. We are creating a variable called computerGuess that will store the computerChoices. To randomize the computer guess, we use math random. However, math random will choose a value between 0 and .99, so we need to FLOOR DOWN the randomizer to a whole number. If we multiply it by omputerChoices.length, we'll get a value between 1-26 (computerChoices.length).
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     console.log(computerGuess);
 
+    function reset() {
+    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
+    guessesLeft = 10;
+    alreadyGuessed = []
+    }
+    	
     // This function is run whenever the user presses a key. We "document" the event when the user releases a key. We will pass the function an argument, the event, which is the key that the user presses.
-    document.onkeyup = function(event) {
+      document.onkeyup = function(event) {
+    
 
     // Determines which key was pressed.We're making a variable to store the event.
-    	
-    	var userGuess = event.key;
-    	console.log(userGuess);
+        var userGuess = event.key;
+        console.log(userGuess);
 
-	// If the userGuess is the same as the random compu[]r guess, we
-		if(computerGuess===userGuess && guessesLeft > 0) {
-		alert("You win!");
+    // If the userGuess is the same as the random computer guess, the user has won.
+//PROBLEM!!! How do I get the computer to pick a NEW random letter once the user has won??
+		  if(computerGuess===userGuess && guessesLeft > 0) {
+		  alert("You win!");
+      wins = wins +1;
+      reset();
 
-	} 	else if (computerGuess!==userGuess && guessesLeft >0) {
-		alert("Nah");
-		guessesLeft = guessesLeft-1;
-		alreadyGuessed.push(userGuess);
+
+    } 	
+
+      else if (computerGuess!==userGuess && guessesLeft >0) {
+		  guessesLeft = guessesLeft-1;
+		  alreadyGuessed.push(userGuess);
+      console.log("Nope: " + alreadyGuessed + " is not right!");
+
+		}	
 		
-	}	
-		else if (guessesLeft <= 0) {
+      else if (guessesLeft <= 0) {
 			alert("YOU LOSE!");
+      reset();
+
 		}
 
-
-
-
-	var html =
+      var html =
           "<p>Wins: " + wins + "</p>" +
           "<p>Losses: " + losses + "</p>" +
           "<p>Guesses Left: " + guessesLeft + "</p>"
           "<p>Letters guessed: " + alreadyGuessed + "</p>";
 
-    document.querySelector("#game").innerHTML = html;      
-}
+    document.querySelector("#game").innerHTML = html; }     
+    
 
 </script>	
 
