@@ -47,9 +47,9 @@
 
     // If the userGuess is the same as the random computer guess AND they have more than 0 guesses left, the user has won. We alert them, add 1 to their wins, and call the reset function.
 		  if(computerGuess===userGuess && guessesLeft > 0) {
-		  alert("You win!");
       wins++;
       reset();
+      alert("You win!");
 
 
     } 	
@@ -59,14 +59,13 @@
       alreadyGuessed.push(userGuess);
       console.log("Nope: " + alreadyGuessed + " is not right!");
       alreadyGuessed.toString();
-      document.getElementById("lettersGuessed").textContent = alreadyGuessed;
 
     }
     // If the user has no more guesses left, they lose. We alert them, add to their losses, and call the reset function.
       else if (guessesLeft <= 0) {
-			alert("YOU LOSE!");
       losses++;
       reset();
+      alert("YOU LOSE!");
 
 		}
       // Creating a html variable to display our stored variables of their wins, losses, guessesLeft, and alreadyGuessed to the user.
@@ -74,7 +73,7 @@
       var html =
           "<p>Wins: " + wins + "</p>" +
           "<p>Losses: " + losses + "</p>" +
-          "<p>Guesses Left: " + guessesLeft + "</p>"
+          "<p>Guesses Left: " + guessesLeft + "</p>" +
           "<p>Already guessed: " + alreadyGuessed + "</p>"
 
           // Finds the HTML id gram and inserts our html variable with our stored values.
