@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Psychic</title>
+</head>
+<body>
+<h1>The Psychic Game</h1>
+<br>
+<h2>Guess what letter I'm thinking of!</h2>
+<div id="game"></div>
+
+<script type="text/javascript">
+	// Creates an array of possible choices for the computer
+	var computerChoices = ["a","b","c","d"
+,"e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+	// Creating variables to hold the number of wins, losses. They start at 0.
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 10;
+    var alreadyGuessed = []
+    	
+  
+
+    // Randomly chooses a choice from the options array. This is the Computer's guess. We are creating a variable called computerGuess that will store the computerChoices. To randomize the computer guess, we use math random. However, math random will choose a value between 0 and .99, so we need to FLOOR DOWN the randomizer to a whole number. If we multiply it by omputerChoices.length, we'll get a value between 1-26 (computerChoices.length).
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
+
+    // This function is run whenever the user presses a key. We "document" the event when the user releases a key. We will pass the function an argument, the event, which is the key that the user presses.
+    document.onkeyup = function(event) {
+
+    // Determines which key was pressed.We're making a variable to store the event.
+    	
+    	var userGuess = event.key;
+    	console.log(userGuess);
+
+	// If the userGuess is the same as the random compu[]r guess, we
+		if(computerGuess===userGuess && guessesLeft > 0) {
+		alert("You win!");
+
+	} 	else if (computerGuess!==userGuess && guessesLeft >0) {
+		alert("Nah");
+		guessesLeft = guessesLeft-1;
+		alreadyGuessed.push(userGuess);
+		
+	}	
+		else if (guessesLeft <= 0) {
+			alert("YOU LOSE!");
+		}
+
+
+
+
+	var html =
+          "<p>Wins: " + wins + "</p>" +
+          "<p>Losses: " + losses + "</p>" +
+          "<p>Guesses Left: " + guessesLeft + "</p>"
+          "<p>Letters guessed: " + alreadyGuessed + "</p>";
+
+    document.querySelector("#game").innerHTML = html;      
+}
+
+</script>	
+
+</body>
+</html>
