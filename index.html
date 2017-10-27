@@ -7,76 +7,13 @@
 
   <h1>The Psychic Game</h1>
   <h2>Guess what letter I'm thinking of!</h2>
-  <div id="game"></div>
+  <div id="game">
+		<p>Wins: <span class="win_count"></span></p>
+    <p>Losses: <span class="loss_count"></span></p>
+    <p>Guesses Left: <span class="guesses_left"></span></p>
+    <p>Already Guessed: <span class="letters_guessed"></span></p>
+	</div>
 
-<script type="text/javascript">
-
-// Creates an array of possible choices for the computer
-  var computerChoices = ["a","b","c","d"
-,"e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-
-// Creating variables to hold the number of wins, losses. They start at 0.
-  var wins = 0;
-  var losses = 0;
-  var guessesLeft = 10;
-  var alreadyGuessed = [];
-
-// Randomly chooses a choice from the options array. This is the Computer's guess. We are creating a variable called computerGuess that will store the computerChoices. To randomize the computer guess, we use math random. However, math random will choose a value between 0 and .99, so we need to FLOOR DOWN the randomizer to a whole number. If we multiply it by omputerChoices.length, we'll get a value between 1-26 (computerChoices.length).
-  var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    console.log(computerGuess);
-
-    // Reset function. I call this when I have a loss or win, resetting the randomizer, the number of guessed left, and making my array empty again.
-  function reset() {
-    alreadyGuessed = [];
-    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    console.log(computerGuess);
-    guessesLeft = 10;
-  }
-    	
-  // This function is run whenever the user presses a key. We "document" the event when the user releases a key. We will pass the function an argument, the event, which is the key that the user presses.
-  document.onkeyup = function(event) {
-    
-    // Determines which key was pressed.We're making a variable to store the event.
-    var userGuess = event.key;
-    console.log(userGuess);
-
-    // If the userGuess is the same as the random computer guess AND they have more than 0 guesses left, the user has won. We alert them, add 1 to their wins, and call the reset function.
-		if(computerGuess===userGuess && guessesLeft > 0) {
-      wins++;
-      reset();
-      alert("You win!");
-    }
-
-    // If they've guessed wrong but they have >0 guesses left, we want to take their event.key and push it into the empty already guessed aray. We also want to keep track of all the guesses and eventually display it the user as a string.
-		else if (computerGuess!==userGuess && guessesLeft >0) {
-      guessesLeft = guessesLeft-1;
-      alreadyGuessed.push(userGuess);
-      console.log("Nope: " + alreadyGuessed + " is not right!");
-      alreadyGuessed.toString();
-    }
-
-    // If the user has no more guesses left, they lose. We alert them, add to their losses, and call the reset function.
-    else if (guessesLeft <= 0) {
-      losses++;
-      reset();
-      alert("YOU LOSE!");
-    }
-
-    // Creating a html variable to display our stored variables of their wins, losses, guessesLeft, and alreadyGuessed to the user.
-      
-    // PROBLEM!! Cannot get my alreadyGuessed array (that has strings already pushed to it) to display with the concatonated strings.
-
-    // PROBLEM SOLVED!!! Was missing a "+" sign after the guessesLeft <p>!!
-    var html =
-      "<p>Wins: " + wins + "</p>" +
-      "<p>Losses: " + losses + "</p>" +
-      "<p>Guesses Left: " + guessesLeft + "</p>" +
-      "<p>Already guessed: " + alreadyGuessed + "</p>"
-
-    // Finds the HTML id gram and inserts our html variable with our stored values.
-    document.querySelector("#game").innerHTML = html;   
-  }
-
-</script>	
+<script type="text/javascript" src="/assets/javascript/game.js"> </script>
 </body>
 </html>
